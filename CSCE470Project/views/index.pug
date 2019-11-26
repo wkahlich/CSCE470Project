@@ -1,0 +1,15 @@
+﻿extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p Ignore styling for now, can make pretty later...
+
+      form(action = "/", method = "POST")
+         div
+            label(for = "genre") Genre:
+            select(name = "genre")
+              for val in ['Horror', 'Comedy', 'Romantic Comedy', 'Documentary', 'Romance']
+                option=val
+         br
+         button(type = "submit") Send my greetings
