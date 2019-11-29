@@ -1,0 +1,16 @@
+doctype html
+
+body
+    p RESULTS: 
+    p#SolrResults #{results}
+
+script.
+    var SolrResults = document.getElementById("SolrResults").innerHTML;
+    var JSONObject = JSON.parse(SolrResults);
+    var numResponses = parseInt(JSONObject["responseHeader"]["params"]["rows"]);
+
+    document.getElementById("SolrResults").innerHTML = "";
+    for (var i = 0; i < numResponses; i++) {
+        var nextResult = JSON.stringify(JSONObject["response"]["docs"][i]["original_title"][0]);
+        document.getElementById("SolrResults").innerHTML = document.getElementById("SolrResults").innerHTML + "<br/>" + nextResult;
+    }
