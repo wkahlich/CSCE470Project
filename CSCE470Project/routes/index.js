@@ -9,10 +9,12 @@ router.get('/', function (req, res) {
 });
 
 router.post('/results/', function (req, res) {
+    console.log(JSON.stringify(req.body));
     // Solr URL used to send requests to the API.
+    
     var numRows = 10;
     //var url = 'http://localhost:8983/solr/moviedb/select?q=genres.name%3A' + req.body['genre'] + '&rows=' + numRows + '&start=0';
-    var url = getURL(req.body['genre'], 'No', 'Recent', 'English Speaking', 'Yes', 'Yes', 'No', numRows);
+    var url = getURL(req.body['genre'], req.body["Q2"], req.body["Q3"], req.body["Q4"], req.body["Q6"], req.body["Q7"], 'No', numRows);
     console.log('URL: ' + url);
 
     fetch(url)
@@ -21,19 +23,19 @@ router.post('/results/', function (req, res) {
                 res.render('results', { results: solrResponse });
             });
         });
-
+    
 });
 
 function getURL(q1, q2, q3, q4, q5, q6, q7, numRows) {
-    // What is your favorite genre?
+    // 1) What is your favorite genre?
     var url = 'http://localhost:8983/solr/moviedb/select?q=genres.name%3A' + q1;
 
-    // Do ratings of movies impact your choise of movie?
+    // 2) Do ratings of movies impact your choise of movie?
     if (q2 == 'Yes') {
         url += ' AND popularity%3A[5 TO 10]'
     }
 
-    // Do you prefer recent releases or old movies?
+    // 3) Do you prefer recent releases or old movies?
     if (q3 == 'Recent') {
         url += ' AND release_date%3A[2000-01-01T00%3A00%3A00Z TO 2020-01-01T00%3A00%3A00Z]';
     }
@@ -41,7 +43,7 @@ function getURL(q1, q2, q3, q4, q5, q6, q7, numRows) {
         url += ' AND release_date%3A[1900-01-01T00%3A00%3A00Z TO 2000-01-01T00%3A00%3A00Z]';
     }
 
-    // Do you prefer English speaking movies or International?
+    // 4) Do you prefer English speaking movies or International?
     if (q4 == 'English Speaking') {
         url += ' AND original_language%3Aen';
     }
@@ -49,17 +51,17 @@ function getURL(q1, q2, q3, q4, q5, q6, q7, numRows) {
         url += ' AND NOT original_language%3Aen';
     }
 
-    // Do you watch animated movies?
+    // 5) Do you watch animated movies?
     if (q5 == 'No') {
-        url += 'AND NOT genres.name%3AAnimation';
+        url += ' AND NOT genres.name%3AAnimation';
     }
 
-    // Do you watch family/kids movies?
+    // 6) Do you watch family/kids movies?
     if (q6 == 'No') {
         url += ' AND NOT genres.name%3AFamily';
     }
 
-    // Do you/Would you watch/enjoy TV movies?
+    // 7) Do you/Would you watch/enjoy TV movies?
     if (q7 == 'No') {
         url += ' AND NOT genres.name%3A"TV Movie"'
     }
