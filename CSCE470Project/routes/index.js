@@ -14,7 +14,7 @@ router.post('/results/', function (req, res) {
     
     var numRows = 10;
     //var url = 'http://localhost:8983/solr/moviedb/select?q=genres.name%3A' + req.body['genre'] + '&rows=' + numRows + '&start=0';
-    var url = getURL(req.body['genre'], req.body["Q2"], req.body["Q3"], req.body["Q4"], req.body["Q6"], req.body["Q7"], 'No', numRows);
+    var url = getURL("\"" + req.body['genre'] + "\"", req.body["Q2"], req.body["Q3"], req.body["Q4"], req.body["Q5"], req.body["Q6"], req.body["Q7"], numRows);
     console.log('URL: ' + url);
 
     fetch(url)
