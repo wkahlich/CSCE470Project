@@ -9,12 +9,16 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
     console.log(req.body);
-    res.send(formatData(req));
+    res.render('output', { title: req.body['genre'], message: "howdy" });
 });
 
 /* Example function on how to access what is passed from the form in index.pug */
-function formatData(req) {
-    return "You selected " + req.body['genre'];
+function redirectToOutput(req, res) {
+    res.render('output', { genre: req.body });
 }
+
+router.get('/output', function (req, res) {
+    res.render('output', { title: 'Hello', message: 'Hello there!' });
+});
 
 module.exports = router;
