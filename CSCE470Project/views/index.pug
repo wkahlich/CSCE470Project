@@ -1,68 +1,71 @@
 ﻿extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p Ignore styling for now, can make pretty later...
 
-      form(action = "/results/", method = "POST")
+  div(class="card")
+
+      h1= title
+      p Welcome to #{title}
+      p Ignore styling for now, can make pretty later...
+
+          form(action = "/results/", method = "POST")
          
-         div
-            label(for = "genre") 1) What is your favorite genre?
-            br
-            select(name = "genre")
-              for val in ['Action', 'Drama', 'Horror', 'Romance', 'Science Fiction', 'Adventure', 'Comedy', 'Crime', 'Documentary', 'Fantasy', 'History', 'Thriller', 'War', 'Western']
-                option=val
-         br
+             div(class="form-group")
+                label(for = "genre") 1) What is your favorite genre?
+                br
+                select(name = "genre")
+                  for val in ['Action', 'Drama', 'Horror', 'Romance', 'Science Fiction', 'Adventure', 'Comedy', 'Crime', 'Documentary', 'Fantasy', 'History', 'Thriller', 'War', 'Western']
+                    option=val
+             br
          
-         div
-            label(for = "Q2") 2) Do ratings of movies impact your choice of movie?
-            br
-            input(type = "radio", name = "Q2", value = "Yes") 
-            | Yes
-            br
-            input(type = "radio", name = "Q2", value = "No")
-            | No
-         br
+             div
+                label(for = "Q2") 2) Do ratings of movies impact your choice of movie?
+                br
+                input(type = "radio", name = "Q2", value = "Yes") 
+                | Yes
+                br
+                input(type = "radio", name = "Q2", value = "No")
+                | No
+             br
          
-         div
-            label(for = "Q3") 1) 3) Do you prefer recent releases or old movies?
-            br
-            select(name = "Q3")
-              for val in ['Recent', 'Older']
-                option=val
-         br
-
-         div
-            label(for = "Q4") 4) Do you prefer English speaking movies or International?
-            br
-            select(name = "Q4")
-                for val in ['English Speaking', 'International']
+             div
+                label(for = "Q3") 1) 3) Do you prefer recent releases or old movies?
+                br
+                select(name = "Q3")
+                  for val in ['Recent', 'Older']
                     option=val
-         br
+             br
 
-         div
-            label(for = "Q5") 5) Do you watch animated movies?
-            br
-            select(name = "Q5")
-                for val in ['Yes', 'No']
-                    option=val
-         br
+             div
+                label(for = "Q4") 4) Do you prefer English speaking movies or International?
+                br
+                select(name = "Q4")
+                    for val in ['English Speaking', 'International']
+                        option=val
+             br
 
-         div
-            label(for = "Q6") 6) Do you watch family/kids movies?
-            br
-            select(name = "Q6")
-                for val in ['Yes', 'No']
-                    option=val
-         br
+             div
+                label(for = "Q5") 5) Do you watch animated movies?
+                br
+                select(name = "Q5")
+                    for val in ['Yes', 'No']
+                        option=val
+             br
 
-         div
-            label(for = "Q7") 7) Do you/Would you watch/enjoy TV movies?
-            br
-            select(name = "Q7")
-                for val in ['Yes', 'No']
-                    option=val
-         br
+             div
+                label(for = "Q6") 6) Do you watch family/kids movies?
+                br
+                select(name = "Q6")
+                    for val in ['Yes', 'No']
+                        option=val
+             br
 
-         button(type = "submit") Send my greetings
+             div
+                label(for = "Q7") 7) Do you/Would you watch/enjoy TV movies?
+                br
+                select(name = "Q7")
+                    for val in ['Yes', 'No']
+                        option=val
+             br
+
+             button(type = "submit" class="btn btn-success") Send my greetings
