@@ -5,8 +5,13 @@ var fetch = require('node-fetch');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.render('index', { title: 'Express' });
+    res.render('intro', { title: 'Movie App' });
 });
+
+router.get('/survey', function (req, res) {
+    res.render('index');
+});
+
 router.post('/results/', function (req, res) {
     console.log(JSON.stringify(req.body));
     // Solr URL used to send requests to the API.
@@ -68,11 +73,6 @@ function getURL(q1, q2, q3, q4, q5, q6, q7, numRows) {
 
     url += '&rows=' + numRows + '&start=0';
     return url;
-}
-
-/* Example function on how to access what is passed from the form in index.pug */
-function redirectToOutput(req, res) {
-    res.render('output', { genre: req.body });
 }
 
 router.get('/output', function (req, res) {
