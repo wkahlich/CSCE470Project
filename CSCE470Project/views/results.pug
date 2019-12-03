@@ -1,13 +1,39 @@
-extends layout
 
-block content
-    //p #{results}
+body
     for obj in JSON.parse(results)
         if(!!obj.docs)
-            for doc in obj.docs
-                h1 #{doc.original_title}
-                - var path = "http://image.tmdb.org/t/p/w500/" + doc.backdrop_path
-                img(src=path)
-                h3 Overview:
+            div#outside
                 br
-                p #{doc.overview}
+                h1#header Our Suggestions
+                for doc in obj.docs
+                    div#main
+                        h1 #{doc.original_title}
+                        - var path = "http://image.tmdb.org/t/p/w500/" + doc.backdrop_path
+                        img(src=path)
+                        br
+                        h4 Genre:
+                        p #{doc["genres.name"]}
+                        h4 Overview:
+                        p #{doc.overview}
+                        - var imdbPage = "http://imdb.com/title/" + doc.imdb_id
+                        h4 More Information:
+                        a(href=imdbPage) Imdb Link
+                        
+
+style.
+    #outside {
+        background-image: url('https://timewellness.files.wordpress.com/2012/03/126551164popcorncrop.jpg?w=600&h=412&crop=1');
+        text-align: center;
+    }
+
+    #main {
+        background-color: rgba(255, 255, 255, 0.87);
+        margin-left: 500px;
+        margin-right: 500px;
+    }
+
+    #header {
+        background-color: rgba(255, 255, 255, 1.0);
+        width: 350px;
+        margin: auto;
+    }
