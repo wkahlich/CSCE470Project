@@ -11,6 +11,7 @@ router.post('/results/', function (req, res) {
     console.log(JSON.stringify(req.body));
     // Solr URL used to send requests to the API.
 
+
     var numRows = 10;
     //var url = 'http://localhost:8983/solr/moviedb/select?q=genres.name%3A' + req.body['genre'] + '&rows=' + numRows + '&start=0';
     var url = getURL("\"" + req.body['genre'] + "\"", req.body["Q2"], req.body["Q3"], req.body["Q4"], req.body["Q5"], req.body["Q6"], req.body["Q7"], numRows);
@@ -18,14 +19,16 @@ router.post('/results/', function (req, res) {
 
     fetch(url)
         .then((response) => {
-            res.render("results", { results: response });
+            response.text().then((solrResponse) => {
+                res.render('results', { results: solrResponse });
+            });
         });
 
 });
 
 function getURL(q1, q2, q3, q4, q5, q6, q7, numRows) {
     // 1) What is your favorite genre?
-    var url = 'http://localhost:8983/solr/movies/select?q=genres.name%3A' + q1;
+    var url = 'http://localhost:8983/solr/moviedb/select?q=genres.name%3A' + q1;
 
     // 2) Do ratings of movies impact your choise of movie?
     if (q2 === 'Yes') {
