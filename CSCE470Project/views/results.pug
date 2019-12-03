@@ -7,7 +7,7 @@ body
                 div#header
                     h1 Our Suggestions
                     br
-                    button(onClick="backToSurvey") Retake Survey
+                    button(onClick="backToSurvey()") Retake Survey
                 for doc in obj.docs
                     div#main
                         h1 #{doc.original_title}
