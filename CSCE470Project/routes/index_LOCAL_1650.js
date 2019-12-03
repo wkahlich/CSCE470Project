@@ -8,7 +8,6 @@ router.get('/', function (req, res) {
     res.render('index', { title: 'Express' });
 });
 
-<<<<<<< HEAD
 router.post('/results/', function (req, res) {
     console.log(JSON.stringify(req.body));
     // Solr URL used to send requests to the API.
@@ -23,11 +22,6 @@ router.post('/results/', function (req, res) {
             res.render("results", { results: response });
         });
     
-=======
-router.post('/', function (req, res) {
-    console.log(req.body);
-    res.render('output', { title: req.body['genre'], message: "howdy" });
->>>>>>> 75017461e6035684f7fcfda2e78a6d17f047a5cd
 });
 
 function getURL(q1, q2, q3, q4, q5, q6, q7, numRows) {
@@ -75,12 +69,8 @@ function getURL(q1, q2, q3, q4, q5, q6, q7, numRows) {
 }
 
 /* Example function on how to access what is passed from the form in index.pug */
-function redirectToOutput(req, res) {
-    res.render('output', { genre: req.body });
+function formatData(req) {
+    return "You selected " + req.body['genre'];
 }
-
-router.get('/output', function (req, res) {
-    res.render('output', { title: 'Hello', message: 'Hello there!' });
-});
 
 module.exports = router;
