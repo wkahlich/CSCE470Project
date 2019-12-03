@@ -7,10 +7,12 @@ var fetch = require('node-fetch');
 router.get('/', function (req, res) {
     res.render('index', { title: 'Express' });
 });
+
+<<<<<<< HEAD
 router.post('/results/', function (req, res) {
     console.log(JSON.stringify(req.body));
     // Solr URL used to send requests to the API.
-
+    
     var numRows = 10;
     //var url = 'http://localhost:8983/solr/moviedb/select?q=genres.name%3A' + req.body['genre'] + '&rows=' + numRows + '&start=0';
     var url = getURL("\"" + req.body['genre'] + "\"", req.body["Q2"], req.body["Q3"], req.body["Q4"], req.body["Q5"], req.body["Q6"], req.body["Q7"], numRows);
@@ -22,7 +24,12 @@ router.post('/results/', function (req, res) {
                 res.render('results', { results: solrResponse });
             });
         });
-
+    
+=======
+router.post('/', function (req, res) {
+    console.log(req.body);
+    res.render('output', { title: req.body['genre'], message: "howdy" });
+>>>>>>> 75017461e6035684f7fcfda2e78a6d17f047a5cd
 });
 
 function getURL(q1, q2, q3, q4, q5, q6, q7, numRows) {
