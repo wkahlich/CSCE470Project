@@ -1,11 +1,8 @@
 extends layout
 
-
-
 block content
     p #{results}
     each response in JSON.parse(results)
         if (!!response.docs)
             for doc in response.docs
                 p #{doc.original_title}
-                
