@@ -28,7 +28,7 @@ router.post('/results/', function (req, res) {
 
 function getURL(q1, q2, q3, q4, q5, q6, q7, numRows) {
     // 1) What is your favorite genre?
-    var url = 'http://localhost:8983/solr/moviedb/select?q=genres.name%3A' + q1;
+    var url = 'http://localhost:8983/solr/movies/select?q=genres.name%3A' + q1;
 
     // 2) Do ratings of movies impact your choise of movie?
     if (q2 === 'Yes') {

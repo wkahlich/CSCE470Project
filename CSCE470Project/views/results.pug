@@ -1,8 +1,13 @@
 extends layout
 
 block content
-    p #{JSON.stringify(results)}
-    each response in JSON.parse(results)
-        if (!!response.docs)
-            for doc in response.docs
-                p #{doc.original_title}
+    //p #{results}
+    for obj in JSON.parse(results)
+        if(!!obj.docs)
+            for doc in obj.docs
+                h1 #{doc.original_title}
+                - var path = "http://image.tmdb.org/t/p/w500/" + doc.backdrop_path
+                img(src=path)
+                h3 Overview:
+                br
+                p #{doc.overview}
