@@ -1,0 +1,42 @@
+﻿doctype html
+
+head
+    link(rel='stylesheet', href='/stylesheets/main.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+    script(src='/js/bootstrap.min.js')
+
+body
+    div(class="card")
+        h1 RESULTS: 
+        button(class="btn btn-success" onclick="back()") Retake Survey
+        div#SolrResults #{results}
+
+script.
+
+    function back() {
+        window.location.href="/";
+    }
+
+    var SolrResults = document.getElementById("SolrResults").innerHTML;
+    var JSONObject = JSON.parse(SolrResults);
+    var numResponses = parseInt(JSONObject["responseHeader"]["params"]["rows"]);
+
+    document.getElementById("SolrResults").innerHTML = "";
+    for (var i = 0; i < numResponses; i++) {
+        var nextResult = "<h1>" + JSON.stringify(JSONObject["response"]["docs"][i]["original_title"][0]).replace(/^"(.*)"$/, '$1') + "</h1>";
+        var doc_image = JSON.stringify(JSONObject["response"]["docs"][i]["backdrop_path"]);
+        var x = 3;
+        x = 2;
+        if (doc_image != undefined) {
+            doc_image = JSON.parse(doc_image)[0];
+        }
+        document.getElementById("SolrResults").innerHTML = document.getElementById("SolrResults").innerHTML + nextResult + "<br/>" + 
+            "<image src=\"http://image.tmdb.org/t/p/w500/" + doc_image + "\">";
+
+    }
+
+style.
+    body {
+        background-image: url('../images/background.png');
+    }

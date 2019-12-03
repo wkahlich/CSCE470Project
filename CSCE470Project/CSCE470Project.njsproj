@@ -39,6 +39,10 @@
     <Content Include="views\index.pug" />
     <Content Include="views\layout.pug" />
     <Content Include="views\error.pug" />
+    <Content Include="views\results.pug">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\results1.pug" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\" />
