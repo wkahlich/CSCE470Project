@@ -9,8 +9,10 @@ head
 body
     div(class="card")
         h1 RESULTS: 
-        button(class="btn btn-success" onclick="back()") Retake Survey
         div#SolrResults #{results}
+        br
+        button(class="btn btn-success" onclick="back()" style={width: '150px'}) Retake Survey
+        br
 
 script.
 
@@ -31,12 +33,19 @@ script.
         if (doc_image != undefined) {
             doc_image = JSON.parse(doc_image)[0];
         }
-        document.getElementById("SolrResults").innerHTML = document.getElementById("SolrResults").innerHTML + nextResult + "<br/>" + 
-            "<image src=\"http://image.tmdb.org/t/p/w500/" + doc_image + "\">";
+        document.getElementById("SolrResults").innerHTML = "<div class="result" ">" + document.getElementById("SolrResults").innerHTML + nextResult + "<br/>" + 
+            "<image src=\"http://image.tmdb.org/t/p/w500/" + doc_image + "\">" + "</div">";
 
     }
+
+script.
+    
 
 style.
     body {
         background-image: url('../images/background.png');
+    }
+
+    #result {
+        border-width: 'thin';
     }
