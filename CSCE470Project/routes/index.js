@@ -19,9 +19,7 @@ router.post('/results/', function (req, res) {
 
     fetch(url)
         .then((response) => {
-            response.text().then((solrResponse) => {
-                res.render('results', { results: solrResponse });
-            });
+            res.render("results", { results: response });
         });
     
 });
