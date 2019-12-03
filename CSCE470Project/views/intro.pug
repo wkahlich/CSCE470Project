@@ -1,0 +1,27 @@
+﻿doctype html
+html
+  head
+    title
+  body
+    div#main
+        h1 Welcome to the Genre Expansion App!
+        p This app is designed to take you out of your comfort zone when it comes to movie genres. Like most people, you probably have a specific genre of movie you stick to - Horror, Sci-Fi, Docmentaries, etc. But there are so many movies out there - why limit yourself?
+        p Click the button below to take our survey. Answer a few easy questions, and we'll find movies outside of your genre that you might like!
+        p Remember, you can always re-take the survey if you'd like to change your answers.
+        button(onClick="toSurvey()") Take Quiz!
+
+script.
+
+    function toSurvey() {
+        window.location.href="/survey";
+    }
+
+style.
+    body {
+        background-image: url('https://timewellness.files.wordpress.com/2012/03/126551164popcorncrop.jpg?w=600&h=412&crop=1');
+        text-align: center;
+    }
+
+    #main {
+        background-color: rgba(255, 255, 255, 0.87);
+    }
