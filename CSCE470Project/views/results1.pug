@@ -1,4 +1,4 @@
-doctype html
+﻿doctype html
 
 head
     link(rel='stylesheet', href='/stylesheets/main.css')
@@ -7,8 +7,10 @@ head
     script(src='/js/bootstrap.min.js')
 
 body
-    h1 Results:
-    
+    div(class="card")
+        h1 RESULTS: 
+        button(class="btn btn-success" onclick="back()") Retake Survey
+        div#SolrResults #{results}
 
 script.
 
