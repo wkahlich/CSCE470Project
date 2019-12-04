@@ -4,10 +4,7 @@ block content
 
   div(class="card")
 
-      h1= title
-      p Welcome to #{title}
-      p Ignore styling for now, can make pretty later...
-
+          h3 Answer the questions below and click submit to see our suggestion
           form(action = "/results/", method = "POST")
          
              div(class="form-group")
@@ -68,4 +65,4 @@ block content
                         option=val
              br
 
-             button(type = "submit" class="btn btn-success") Send my greetings
+             button(type = "submit" class="btn btn-success") Submit
