@@ -17,7 +17,7 @@ router.post('/results/', function (req, res) {
     // Solr URL used to send requests to the API.
 
 
-    var numRows = 10;
+    var numRows = 100;
     //var url = 'http://localhost:8983/solr/moviedb/select?q=genres.name%3A' + req.body['genre'] + '&rows=' + numRows + '&start=0';
     var url = getURL("\"" + req.body['genre'] + "\"", req.body["Q2"], req.body["Q3"], req.body["Q4"], req.body["Q5"], req.body["Q6"], req.body["Q7"], numRows);
     console.log('URL: ' + url);
@@ -25,15 +25,38 @@ router.post('/results/', function (req, res) {
     fetch(url)
         .then((response) => {
             response.text().then((solrResponse) => {
-                res.render('results', { results: solrResponse });
+                var resultsJSON = JSON.parse(solrResponse);
+                var arr = resultsJSON["response"]["docs"];
+                
+                arr = shuffle(arr);
+                arr = arr.slice(0, 10);
+                resultsJSON.response.docs = arr;
+                
+                res.render('results', { results: JSON.stringify(resultsJSON) });
             });
         });
 
 });
 
+function shuffle(arr) {
+    var upper = arr.length;
+
+    while (upper > 0) {
+        var i = Math.floor(Math.random() * upper);
+        upper--;
+
+        var tmp = arr[upper];
+        arr[upper] = arr[i];
+        arr[i] = tmp;
+    }
+
+    return arr;
+
+}
+
 function getURL(q1, q2, q3, q4, q5, q6, q7, numRows) {
     // 1) What is your favorite genre?
-    var url = 'http://localhost:8983/solr/movies/select?q= NOT genres.name%3A' + q1;
+    var url = 'http://localhost:8983/solr/moviedb/select?q= NOT genres.name%3A' + q1;
 
     // 2) Do ratings of movies impact your choise of movie?
     if (q2 === 'Yes') {
