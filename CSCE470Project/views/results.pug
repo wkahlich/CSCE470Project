@@ -5,25 +5,27 @@ body
             div#outside
                 br
                 div#header
-                    h1 Our Suggestions
+                    h1 Our Suggestion
                     br
+                - var docnum = Math.floor(Math.random() * 10)
+                div#main
+                    h1 #{obj.docs[docnum].original_title}
+                    - var path = "http://image.tmdb.org/t/p/w500/" + obj.docs[docnum].backdrop_path
+                    img(src=path)
+                    br
+                    h4 Genre:
+                    p #{obj.docs[docnum]["genres.name"]}
+                    h4 Popularity Score:
+                    p #{obj.docs[docnum].popularity}/10
+                    h4 Overview:
+                    p #{obj.docs[docnum].overview}
+                    - var imdbPage = "http://imdb.com/title/" + obj.docs[docnum].imdb_id
+                    h4 More Information:
+                    a(href=imdbPage) Imdb Link
+                div#button
                     button(onClick="backToSurvey()") Retake Survey
-                for doc in obj.docs
-                    div#main
-                        h1 #{doc.original_title}
-                        - var path = "http://image.tmdb.org/t/p/w500/" + doc.backdrop_path
-                        img(src=path)
-                        br
-                        h4 Genre:
-                        p #{doc["genres.name"]}
-                        h4 Popularity Score:
-                        p #{doc.popularity}/10
-                        h4 Overview:
-                        p #{doc.overview}
-                        - var imdbPage = "http://imdb.com/title/" + doc.imdb_id
-                        h4 More Information:
-                        a(href=imdbPage) Imdb Link
-                        
+
+               
 
 style.
     #outside {
@@ -41,6 +43,10 @@ style.
         background-color: rgba(255, 255, 255, 1.0);
         width: 350px;
         margin: auto;
+    }
+
+    #button {
+        margin-top: 50px;
     }
 
 script.
